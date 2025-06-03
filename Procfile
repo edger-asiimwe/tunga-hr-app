@@ -1,0 +1,1 @@
+web: flask db upgrade -d migrations/public/; flask db upgrade -d migrations/tenant/; gunicorn manage:app
