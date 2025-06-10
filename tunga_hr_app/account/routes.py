@@ -63,7 +63,7 @@ def invite_user():
         invited_user = Invited_Users(
            email = request_data['email'],
            job_title = request_data.get('job_title'),
-           role = request_data['role'], 
+           role = request_data.get('role'), 
            invited_by = current_user
         )
         db.session.add(invited_user)
@@ -78,6 +78,7 @@ def invite_user():
         )
 
     except Exception as e:
+        print(f"Error inviting user: {e}")
         return jsonify({'error': e}), 400
 
     return jsonify({'message': 'Email invite successfully sent'}), 200

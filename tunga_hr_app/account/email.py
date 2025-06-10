@@ -6,12 +6,14 @@ def send_invite_user_email(invited_user, organization_id, organization_name):
     token = invited_user.get_invite_token(organization_id)
     invite_link = f"{current_app.config['BASE_CLIENT_URL']}/confirm-invite/?token={token}"
 
-    send_email(subject='[Tunga HR] - Invite to join workspace',
-               sender=current_app.config['MAIL_DEFAULT_SENDER'],
-               recipients=[invited_user.email],
-               html_body=render_template('invite_user.html',
-                                         organization_name=organization_name, 
-                                         url=invite_link))
+    print(f"Invite link: {invite_link}")
+
+    #send_email(subject='[Tunga HR] - Invite to join workspace',
+    #          sender=current_app.config['MAIL_DEFAULT_SENDER'],
+    #          recipients=[invited_user.email],
+    #          html_body=render_template('invite_user.html',
+    #                                    organization_name=organization_name, 
+    #                                    url=invite_link))
     
 
 def send_password_reset_email(user):

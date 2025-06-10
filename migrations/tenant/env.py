@@ -57,7 +57,7 @@ tenants = [tenant.organization_id for tenant in Organization.query.all()]
 # For initial migrations, uncomment this next line
 #tenants = ["test"]
 
-
+ 
 def get_metadata():
     if hasattr(target_db, "metadatas"):
         return target_db.metadatas[None]

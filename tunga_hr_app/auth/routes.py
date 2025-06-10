@@ -52,7 +52,9 @@ def register():
             # Create new schema for Organization Tenant
             Database(organization.organization_id).create_tenant_schema()
 
-            send_account_validation_email(user=user)
+            # Send account validation email 
+            # Uncomment once emails are activated
+            #send_account_validation_email(user=user)
 
         except IntegrityError as e:
             db.session.rollback()
@@ -82,14 +84,14 @@ def login():
             ).first_or_404()
             
         access_token = create_access_token(
-                    identity=user.user_id,
+                    identity=str(user.user_id),
                     additional_claims={"tenant": user_organization.organization_id},
                     expires_delta=datetime.timedelta(days=1)
                 )
         
         refresh_token = create_refresh_token(
             identity=user.user_id,
-            additional_claims={"tenant": user_organization.organization_id}, 
+            additional_claims={"tenant": str(user_organization.organization_id)}, 
             expires_delta=datetime.timedelta(days=1)
         )
 

@@ -84,7 +84,7 @@ class User(db.Model):
         return db.session.get(User, user_id)
     
     def __init__(self, data, new_user=True):
-        for field in ['first_name', 'last_name', 'email', 'phone_number', 'role']:
+        for field in ['first_name', 'last_name', 'email', 'job_title', 'phone_number', 'role']:
             if field in data:
                 setattr(self, field, data[field])
         if new_user and 'password' in data:
@@ -188,6 +188,7 @@ class Invited_Users(db.Model):
         return {
             'email': payload['email'],
             'role': payload['role'], 
+            'job_title': payload['job_title'],
             'organization_id': payload['organization_id']
         }
 
